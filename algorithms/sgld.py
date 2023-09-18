@@ -6,8 +6,7 @@ def sgld(grad_log_sampling_fun, grad_log_prior_fun, data, seed, learning_rate, b
     n = len(data)  # data is the training observations
 
     w = np.array(seed)  # Set seed
-    trace = [0] * (max_epochs + 1)  # Preallocate memory for the trace
-    trace[0] = w  # Initialize trace
+    trace = [w.copy()]
 
     for epoch in range(max_epochs):
         J = np.random.randint(0, n, size=batch_size)  # Sample a random index
@@ -24,7 +23,7 @@ def sgld(grad_log_sampling_fun, grad_log_prior_fun, data, seed, learning_rate, b
         noise = np.sqrt(eta * tau) * epsilon
 
         w = w + eta * (log_lik_grad_est + grad_log_prior) + noise  # Update parameter
-        trace[epoch + 1] = w.copy()  # Append the current parameter value to the trace
+        trace.append(w.copy())  # Append the current parameter value to the trace
     
     if return_trace:
         return w, np.array(trace)
