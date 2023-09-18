@@ -57,7 +57,7 @@ _Remark: A natural choice for the preconditioner is $P_t:=\left[H_t+\epsilon I_d
 
 AdaGrad is an adaptive learning rate optimization algorithm designed to automatically adjust the learning rates for each parameter during training. It is particularly effective in handling sparse data and problems with varying feature scales. AdaGrad adapts the learning rates for each parameter based on the historical gradient information. It effectively reduces the learning rate for frequently updated parameters and increases it for less frequently updated parameters, leading to better convergence.
 
-The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \operatorname{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $G_t=\sum_{\tau=1}^t v_\tau^{\top} v_\tau$.
+The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $G_t=\sum_{\tau=1}^t v_\tau^{\top} v_\tau$.
 
 <span style="color:red">Haven't yet implemented AdaGrad</span>.
 
