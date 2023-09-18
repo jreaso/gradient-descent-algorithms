@@ -62,6 +62,8 @@ AdaGrad is an adaptive learning rate optimization algorithm designed to automati
 
 The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $G_t=\sum_{\tau=1}^t v_\tau^{\top} v_\tau$.
 
+The implementation is `adagrad` in `adagrad.py`.
+
 > **AdaGrad Parameter Update Step**
 > 
 > - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$.
@@ -69,18 +71,16 @@ The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G
 > - Update preconditioner: $$G_t = G_{t-1} + (\bar{v}_t)^2$$
 > - Update parameter: $$w^{(t+1)} = w^{(t)} - \eta_t (G_t + \epsilon)^{-1/2} \bar{v}_t$$ which can alternatively be written as (in element-wise form): $$w^{(t+1)}_j = w^{(t)}_j - \frac{\eta_t \cdot \bar{v}_{t,j}}{\sqrt{[G_t]_{j,j} + \epsilon}}$$.
 
-> **Haven't yet implemented AdaGrad**
-
 
 ### Stochastic Gradient Langevin Dynamic (SGLD)
 
 Stochastic Gradient Langevin Dynamics (SGLD) is a Bayesian optimization algorithm that combines Stochastic Gradient Descent (SGD) with Langevin dynamics. It is commonly used for Bayesian inference and sampling from high-dimensional probability distributions.
 
+The implementation is `sgld` in `sgld.py`.
+
 > **SGLD Parameter Update Step**
 >
-> - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$ **without replacement**.
+> - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$ without replacement.
 > - Update parameter:  $$w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise}$$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
 >
 > $\tau$ is called the temperature.
-
-> **Haven't yet implemented SGLD**
