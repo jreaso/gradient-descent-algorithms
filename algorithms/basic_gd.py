@@ -1,3 +1,5 @@
+import numpy as np
+
 # Gradient Descent Algorithm
 def gd(grad_fun, seed, learning_rate=0.1, max_epochs=1000, stopping_tolerance=1e-6, return_trace=False):
     w = np.array(seed)  # Set seed
