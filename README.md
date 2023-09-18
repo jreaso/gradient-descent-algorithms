@@ -2,7 +2,7 @@
 
 A collection of python implementations of gradient descent algorithms. These algorithms are not written for efficiency but rather to demonstrate how the algorithms work.
 
-The `algorithms/` directory contains the code for the actual implementaions of the different algorithms but there are notebooks applying these algorithms to real example minimising loss functions.
+The `algorithms/` directory contains the code for the actual implementaions of the different algorithms but the `logistic_regression_example.ipynb` notebook applies these algorithms to solve a simple logistic regression problem.
 
 ## Algorithms
 
