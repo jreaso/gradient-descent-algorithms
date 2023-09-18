@@ -13,8 +13,8 @@ def svrg(grad_fun, data, seed, learning_rate, kappa=100, max_epochs=1000, return
             cv_w = w.copy()  # control variate w
             cv_expectation = grad_fun(w, data)  # control variate expectation
 
-        j = np.random.randint(0, n_obs)  # Take a random index
-        batch = data[j, :]  # Sample the batch
+        J = np.random.randint(0, n_obs, size=1)  # Take a random index
+        batch = data[J, :]  # Sample the batch
 
         grad = grad_fun(w, batch)  # Compute gradient
         cv_grad = grad_fun(cv_w, batch)  # Compute control variate gradient
