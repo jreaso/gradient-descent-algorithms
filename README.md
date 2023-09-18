@@ -4,6 +4,8 @@ A collection of python implementations of gradient descent algorithms. These alg
 
 The `algorithms/` directory contains the code for the actual implementaions of the different algorithms but the `logistic_regression_example.ipynb` notebook applies these algorithms to solve a simple logistic regression problem.
 
+The algorithms have been implemented with minimizing a loss function in mind and so the notation is not for a general function $f$.
+
 ## Algorithms
 
 ### Gradient Descent (GD)
@@ -52,6 +54,7 @@ Preconditioned Stochastic Gradient Descent (P-SGD) is a variant of SGD that inco
 
 _Remark: A natural choice for the preconditioner is $P_t:=\left[H_t+\epsilon I_d\right]^{-1}$ where $H_t$ is the Hessian matrix and the small $\epsilon$ is added to account for machine error when the Hessian is small. $$\left[H_t\right]_{i, j}=\left.\frac{\partial^2}{\partial w_i \partial w_j} f(w)\right|_{w=w^{(t)}}$$_
 
+The only P-SGD algorithm we implement is AdaGrad.
 
 #### AdaGrad
 
@@ -59,11 +62,25 @@ AdaGrad is an adaptive learning rate optimization algorithm designed to automati
 
 The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $G_t=\sum_{\tau=1}^t v_\tau^{\top} v_\tau$.
 
-<span style="color:red">Haven't yet implemented AdaGrad</span>.
+> **AdaGrad Parameter Update Step**
+> 
+> - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$.
+> - Compute $$\bar{v}_t=\frac{1}{m} \sum_{j \in \mathcal{J}^{(t)}} v_{t, j} \quad \text{ where } \quad  v_{t, j} \in \partial_w \ell \left(w^{(t)}, z_j\right)$$
+> - Update preconditioner: $$G_t = G_{t-1} + (\bar{v}_t)^2$$
+> - Update parameter: $$w^{(t+1)} = w^{(t)} - \eta_t (G_t + \epsilon)^{-1/2} \bar{v}_t$$ which can alternatively be written as (in element-wise form): $$w^{(t+1)}_j = w^{(t)}_j - \frac{\eta_t \cdot \bar{v}_{t,j}}{\sqrt{[G_t]_{j,j} + \epsilon}}$$.
+
+> **Haven't yet implemented AdaGrad**
 
 
 ### Stochastic Gradient Langevin Dynamic (SGLD)
 
 Stochastic Gradient Langevin Dynamics (SGLD) is a Bayesian optimization algorithm that combines Stochastic Gradient Descent (SGD) with Langevin dynamics. It is commonly used for Bayesian inference and sampling from high-dimensional probability distributions.
 
-<span style="color:red">Haven't yet implemented SGLD</span>.
+> **SGLD Parameter Update Step**
+>
+> - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$ **without replacement**.
+> - Update parameter: $$w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise}$$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
+>
+> $\tau$ is called the temperature.
+
+> **Haven't yet implemented SGLD**
