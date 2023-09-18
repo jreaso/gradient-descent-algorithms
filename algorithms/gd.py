@@ -3,7 +3,6 @@ import numpy as np
 # Basic Gradient Descent Algorithm
 def basic_gd(grad_fun, seed, learning_rate=0.1, max_epochs=1000, stopping_tolerance=1e-6, return_trace=False):
     w = np.array(seed)  # Set seed
-    
     trace = [w]  # Initialize trace
 
     for epoch in range(max_epochs):
@@ -23,7 +22,6 @@ def basic_gd(grad_fun, seed, learning_rate=0.1, max_epochs=1000, stopping_tolera
 # Gradient Descent with Variable Learning Rate
 def gd(grad_fun, seed, learning_rate, max_epochs=1000, stopping_tolerance=1e-6, return_trace=False):
     w = np.array(seed)  # Set seed
-    
     trace = [w]  # Initialize trace
 
     for epoch in range(max_epochs):
