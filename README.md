@@ -46,6 +46,10 @@ The implementation is `svrg` in `svrg.py`.
 
 Preconditioned Stochastic Gradient Descent (P-SGD) is a variant of SGD that incorporates a preconditioning matrix to adaptively scale the learning rates for different parameters. This adaptive scaling can lead to improved convergence in certain optimization problems.
 
+> **P-SGD Parameter Update Step**
+> 
+> - Update parameter: $$w^{(t+1)}=w^{(t)}-\eta_t P_t v_t$$ where $v_t$ is a random vector such that $E\left(v_t \mid w^{(t)}\right) \in \partial f\left(w^{(t)}\right)$, and $P_t$ a preconditioner.
+
 
 ### AdaGrad
 
