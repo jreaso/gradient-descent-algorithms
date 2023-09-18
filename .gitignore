@@ -1,5 +1,7 @@
 # Jupyter Notebook checkpoints
 **/.ipynb_checkpoints/
 
+**/__pycache__/
+
 # mac local files
 **/.DS_Store
