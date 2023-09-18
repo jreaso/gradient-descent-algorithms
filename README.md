@@ -42,6 +42,16 @@ The implementation is `svrg` in `svrg.py`.
 > - Update parameter: $$w^{(t+1)}=w^{(t)}-\eta_t\left[\nabla \ell\left(w^{(t)}, \tilde{z}^{(t)}\right)-\underbrace{\nabla \ell\left(\tilde{w}, \tilde{z}^{(t)}\right) + \frac{1}{n} \sum_{i=1}^n \nabla \ell\left(\tilde{w}, z_i\right)}_\text{control variable and expectation}\right]$$
 > - If ($t \equiv 0 \mod \kappa$), update control variate snapshot: $$\tilde{w} = w^{(t)}$$
 
-### Preconditioned SGD and AdaGrad
+### Preconditioned SGD
+
+Preconditioned Stochastic Gradient Descent (P-SGD) is a variant of SGD that incorporates a preconditioning matrix to adaptively scale the learning rates for different parameters. This adaptive scaling can lead to improved convergence in certain optimization problems.
+
+
+### AdaGrad
+
+AdaGrad is an adaptive learning rate optimization algorithm designed to automatically adjust the learning rates for each parameter during training. It is particularly effective in handling sparse data and problems with varying feature scales. AdaGrad adapts the learning rates for each parameter based on the historical gradient information. It effectively reduces the learning rate for frequently updated parameters and increases it for less frequently updated parameters, leading to better convergence.
+
 
 ### Stochastic Gradient Langevin Dynamic (SGLD)
+
+Stochastic Gradient Langevin Dynamics (SGLD) is a Bayesian optimization algorithm that combines Stochastic Gradient Descent (SGD) with Langevin dynamics. It is commonly used for Bayesian inference and sampling from high-dimensional probability distributions.
