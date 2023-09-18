@@ -1,25 +1,32 @@
 import numpy as np
 
 # Stochastic Gradient Langevin Dynamic
-def sgld(grad_fun, data, seed, learning_rate, kappa=100, max_epochs=1000, return_trace=False):
-    n_obs = len(data)  # data is the training observations
+def sgld(grad_log_sampling_pdf_fun, grad_log_prior_fun, data, seed, learning_rate, batch_size=10,
+         tau=1.0, max_epochs=1000, clipping_threshold=10, return_trace=False):
+    n = len(data)  # data is the training observations
 
     w = np.array(seed)  # Set seed
     trace = [w]  # Initialize trace
 
     for epoch in range(max_epochs):
-        # Update control variate snapshot
-        if epoch % kappa == 0:
-            cv_w = w.copy()  # control variate w
-            cv_expectation = grad_fun(w, data)  # control variate expectation
+        J = np.random.randint(0, n, size=batch_size)  # Sample a random index
 
-        J = np.random.randint(0, n_obs, size=1)  # Take a random index
-        batch = data[J, :]  # Sample the batch
+        # Log Likelihood Gradient Estimate
+        log_lik_grad_est = 0.0
+        for j in J:
+            log_lik_grad_est += grad_log_sampling_pdf_fun(w, data[j])
+        log_lik_grad_est *= n/batch_size
 
-        grad = grad_fun(w, batch)  # Compute gradient
-        cv_grad = grad_fun(cv_w, batch)  # Compute control variate gradient
+        log_lik_grad_est *= min(1.0, clipping_threshold / np.abs(log_lik_grad_est))  # Gradient Clipping
 
-        w = w - learning_rate(epoch) * (grad  - cv_grad + cv_expectation) # Update parameter
+        grad_log_prior = grad_log_prior_fun(w)  # Log Prior Gradient
+
+        eta = learning_rate(epoch)  # Compute learning rate for this epoch
+        # Compute noise
+        epsilon = np.random.normal(0.0, 1.0, size=w.shape)
+        noise = np.sqrt(eta * tau) * epsilon
+
+        w = w + eta * (log_lik_grad_est + grad_log_prior) + noise  # Update parameter
         trace.append(w.copy())  # Append the current parameter value to the trace
     
     if return_trace:
