@@ -36,7 +36,7 @@ This algorithm is written up in `sgd.py` with the following variations:
 > 
 > - Take a single random observation $\tilde{z}^{(t)}$ from $\mathcal{S}_n$.
 > - Update parameter: $$w^{(t+1)}=w^{(t)}-\eta_t\left[\nabla \ell\left(w^{(t)}, \tilde{z}^{(t)}\right)-\underbrace{\nabla \ell\left(\tilde{w}, \tilde{z}^{(t)}\right) + \frac{1}{n} \sum_{i=1}^n \nabla \ell\left(\tilde{w}, z_i\right)}_\text{control variable and expectation}\right]$$
-> - If ($t \equiv 0 \mod \kappa$), update control variate snapshot:$$\tilde{w} = w^{(t)}$$
+> - If ($t \equiv 0 \mod \kappa$), update control variate snapshot: $$\tilde{w} = w^{(t)}$$
 
 ### Preconditioned SGD and AdaGrad
 
