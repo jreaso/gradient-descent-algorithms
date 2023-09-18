@@ -23,7 +23,7 @@ This algorithm is written up in `sgd.py` with the following variations:
 - The basic implementation with only one training instance is simply `batch_sgd` with `batch_size = 1`.
 - `batch_sgd_projection`- batch sgd with projection to solution space.
 
-###  Stochastic Variance Reduced Gradient Descent (SVRGD)
+###  Stochastic Variance Reduced Gradient (SVRG)
 
 ### Preconditioned SGD and AdaGrad
 
