@@ -79,7 +79,7 @@ Stochastic Gradient Langevin Dynamics (SGLD) is a Bayesian optimization algorith
 > **SGLD Parameter Update Step**
 >
 > - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$ **without replacement**.
-> - Update parameter: $$w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise}$$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
+> - Update parameter:  $$w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise}$$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
 >
 > $\tau$ is called the temperature.
 
