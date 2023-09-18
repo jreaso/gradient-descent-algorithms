@@ -16,7 +16,7 @@ def adagrad(grad_fun, data, seed, learning_rate, batch_size=30, epsilon=1e-6, ma
 
         G = G + grad**2  # Update the accumulator matrix G with squared gradients
         
-        w = w - (learning_rate / (np.sqrt(G) + epsilon)) * grad  # Update parameter w using AdaGrad formula
+        w = w - (learning_rate(epoch) / (np.sqrt(G) + epsilon)) * grad  # Update parameter w using AdaGrad formula
         trace.append(w.copy())  # Append the current parameter value to the trace
     
     if return_trace:
