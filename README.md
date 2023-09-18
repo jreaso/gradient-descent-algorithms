@@ -32,6 +32,10 @@ This algorithm is written up in `sgd.py` with the following variations:
 
 ###  Stochastic Variance Reduced Gradient (SVRG)
 
+SVRG is an improvement upon SGD. Like SGD, SVRG operates on subsets of training data, but it incorporates a _control variate mechanism_ to reduce the variance of gradient estimates and improve convergence speed.
+
+The implementation is `svrg` in `svrg.py`.
+
 > **SVRG Parameter Update Step**
 > 
 > - Take a single random observation $\tilde{z}^{(t)}$ from $\mathcal{S}_n$.
