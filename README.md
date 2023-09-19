@@ -6,6 +6,8 @@ The `algorithms/` directory contains the code for the actual implementaions of t
 
 The algorithms have been implemented with minimizing a loss function in mind and so the notation is not for a general function $f$.
 
+_Note: some equations may not render correctly in GitHub but should in other markdown viewers._
+
 ## Algorithms
 
 ### Gradient Descent (GD)
@@ -60,7 +62,7 @@ The only P-SGD algorithm we implement is AdaGrad.
 
 AdaGrad is an adaptive learning rate optimization algorithm designed to automatically adjust the learning rates for each parameter during training. It is particularly effective in handling sparse data and problems with varying feature scales. AdaGrad adapts the learning rates for each parameter based on the historical gradient information. It effectively reduces the learning rate for frequently updated parameters and increases it for less frequently updated parameters, leading to better convergence.
 
-The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $ G_t = \sum_{\tau=1}^t v_\tau^{\top} v_\tau $.
+The AdaGrad algorithm uses the preconditioner $$P_t=\left[I_d \text{diag}\left(G_t\right) I_d+\epsilon I_d\right]^{-1 / 2}$$ where $G_t = \sum_{\tau=1}^t v_\tau^{\top} v_\tau$.
 
 The implementation is `adagrad` in `adagrad.py`.
 
@@ -69,7 +71,7 @@ The implementation is `adagrad` in `adagrad.py`.
 > - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$.
 > - Compute $$\bar{v}_t=\frac{1}{m} \sum_{j \in \mathcal{J}^{(t)}} v_{t, j} \quad \text{ where } \quad  v_{t, j} \in \partial_w \ell \left(w^{(t)}, z_j\right)$$
 > - Update preconditioner: $$G_t = G_{t-1} + (\bar{v}_t)^2$$
-> - Update parameter: $$w^{(t+1)} = w^{(t)} - \eta_t (G_t + \epsilon)^{-1/2} \bar{v}_t$$ which can alternatively be written in element-wise form as: $$ w^{(t+1)}_j = w^{(t)}_j - \frac{\eta_t \cdot \bar{v}_{t,j}}{\sqrt{[G_t]_{j,j} + \epsilon}} $$.
+> - Update parameter: $$w^{(t+1)} = w^{(t)} - \eta_t (G_t + \epsilon)^{-1/2} \bar{v}_t$$ which can alternatively be written in element-wise form as: $$w^{(t+1)}_j = w^{(t)}_j - \frac{\eta_t \cdot \bar{v}_{t,j}}{\sqrt{[G_t]_{j,j} + \epsilon}}$$.
 
 
 ### Stochastic Gradient Langevin Dynamic (SGLD)
@@ -81,7 +83,7 @@ The implementation is `sgld` in `sgld.py`.
 > **SGLD Parameter Update Step**
 >
 > - Take a random **sub-sample** of indices $\mathcal{J}^{(t)} \subseteq\{1, \ldots, n\}$ of size $m$ without replacement.
-> - Update parameter:  $$ w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise} $$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
+> - Update parameter:  $$w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise} $$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
 >
 > $\tau$ is called the temperature.
 
