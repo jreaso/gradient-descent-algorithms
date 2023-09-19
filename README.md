@@ -84,3 +84,23 @@ The implementation is `sgld` in `sgld.py`.
 > - Update parameter:  $$ w^{(t+1)}=w^{(t)}+\eta_t\left(\underbrace{\frac{n}{m} \sum_{i \in J^{(t)}} \nabla_w \log f\left(z_i \mid w^{(t)}\right)}_\text{Log Likelihood Gradient Estimate}+\underbrace{\nabla_w \log f(w^{(t)})}_\text{Log Prior Gradient}\right)+\underbrace{\sqrt{\eta_t} \cdot \sqrt{\tau} \cdot \epsilon_t}_\text{Noise} $$ where $\epsilon_t \stackrel{\mathrm{iid}}{\sim} \mathcal{N}(0,1)$ is random noise.
 >
 > $\tau$ is called the temperature.
+
+
+## Plots
+
+For all plots, look at the notebooks. Below are some highlights.
+
+### Batch SGD Trace Plots
+![](images/bsgd_trace_plots.png)
+
+### Batch SGD with Projection Path
+![](images/bsgd_with_projection_path_heatmap.png)
+
+### AdaGrad Trace Plots
+![](images/adagrad_trace_plots.png)
+
+### AdaGrad Path
+![](images/adagrad_path_heatmap.png)
+
+### SGLD Trace Plot
+![](images/sgld_trace_plot.png)
